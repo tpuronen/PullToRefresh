@@ -29,8 +29,10 @@
 
 #import <UIKit/UIKit.h>
 
+typedef void(^RefreshAction)(void);
 
-@interface PullRefreshTableViewController : UITableViewController {
+@interface PullRefreshController : NSObject<UIScrollViewDelegate> {
+    UIScrollView *parentView;
     UIView *refreshHeaderView;
     UILabel *refreshLabel;
     UIImageView *refreshArrow;
@@ -40,8 +42,11 @@
     NSString *textPull;
     NSString *textRelease;
     NSString *textLoading;
+    
+    RefreshAction refreshAction;
 }
 
+@property (nonatomic, retain) UIScrollView *parentView;
 @property (nonatomic, retain) UIView *refreshHeaderView;
 @property (nonatomic, retain) UILabel *refreshLabel;
 @property (nonatomic, retain) UIImageView *refreshArrow;
@@ -50,10 +55,13 @@
 @property (nonatomic, copy) NSString *textRelease;
 @property (nonatomic, copy) NSString *textLoading;
 
+@property (nonatomic, copy) RefreshAction refreshAction;
+
+- (id) initWhen:(UIScrollView*)parent pulledExecute:(void(^)())block;
+
 - (void)setupStrings;
 - (void)addPullToRefreshHeader;
 - (void)startLoading;
 - (void)stopLoading;
-- (void)refresh;
 
 @end

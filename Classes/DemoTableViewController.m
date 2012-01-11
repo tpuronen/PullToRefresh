@@ -16,6 +16,8 @@
 
     self.title = @"Pull to Refresh";
     items = [[NSMutableArray alloc] initWithObjects:@"What time is it?", nil];
+    pullToRefresh = [[PullRefreshController alloc] initWhen:self.tableView pulledExecute:^{
+        [self performSelector:@selector(addItem) withObject:nil afterDelay:2.0];}];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -53,7 +55,7 @@
 
     [self.tableView reloadData];
 
-    [self stopLoading];
+    [pullToRefresh stopLoading];
 }
 
 - (void)dealloc {
