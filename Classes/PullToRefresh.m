@@ -36,14 +36,14 @@
 
 @synthesize parentView, textPull, textRelease, textLoading, refreshHeaderView, refreshLabel, refreshArrow, refreshSpinner, refreshAction;
 
-- (id) initWhen:(UIScrollView*)parent pulledExecute:(void(^)())block {
+- (id) initWhen:(UIScrollView*)parent pulledExecute:(void(^)())block textColor:(UIColor*)textColor {
     self = [super init];
     if (self) {
         [self setupStrings];
         self.refreshAction = block;
         self.parentView = parent;
         self.parentView.delegate = self;
-        [self addPullToRefreshHeader];
+        [self addPullToRefreshHeader:textColor];
     }
     return self;
 }
@@ -54,7 +54,7 @@
   textLoading = [[NSString alloc] initWithString:@"Loading..."];
 }
 
-- (void)addPullToRefreshHeader {
+- (void)addPullToRefreshHeader:(UIColor*)textColor {
     refreshHeaderView = [[UIView alloc] initWithFrame:CGRectMake(0, 0 - REFRESH_HEADER_HEIGHT, 320, REFRESH_HEADER_HEIGHT)];
     refreshHeaderView.backgroundColor = [UIColor clearColor];
 
@@ -62,7 +62,7 @@
     refreshLabel.backgroundColor = [UIColor clearColor];
     refreshLabel.font = [UIFont boldSystemFontOfSize:12.0];
     refreshLabel.textAlignment = UITextAlignmentCenter;
-    refreshLabel.textColor = [UIColor blackColor];
+    refreshLabel.textColor = textColor;
 
     refreshArrow = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"arrow.png"]];
     refreshArrow.frame = CGRectMake(floorf((REFRESH_HEADER_HEIGHT - 27) / 2),

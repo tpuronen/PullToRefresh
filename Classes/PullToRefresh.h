@@ -57,10 +57,10 @@ typedef void(^RefreshAction)(void);
 
 @property (nonatomic, copy) RefreshAction refreshAction;
 
-- (id) initWhen:(UIScrollView*)parent pulledExecute:(void(^)())block;
+- (id) initWhen:(UIScrollView*)parent pulledExecute:(void(^)())block textColor:(UIColor*)textColor;
 
 - (void)setupStrings;
-- (void)addPullToRefreshHeader;
+- (void)addPullToRefreshHeader:(UIColor*)textColor;
 - (void)startLoading;
 - (void)stopLoading;
 

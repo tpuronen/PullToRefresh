@@ -17,7 +17,7 @@
     self.title = @"Pull to Refresh";
     items = [[NSMutableArray alloc] initWithObjects:@"What time is it?", nil];
     pullToRefresh = [[PullRefreshController alloc] initWhen:self.tableView pulledExecute:^{
-        [self performSelector:@selector(addItem) withObject:nil afterDelay:2.0];}];
+        [self performSelector:@selector(addItem) withObject:nil afterDelay:2.0];} textColor:[UIColor blackColor]];
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
